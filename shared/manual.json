@@ -1,0 +1,236 @@
+{
+  "titulo": "Cuaderno de ayuda",
+  "bajada": "Manual del sistema del Centro de Atención Psicopedagógica. Cada capítulo explica una tarea completa, en el orden en que se usa el cuaderno.",
+  "capitulos": [
+    {
+      "id": "como-leer",
+      "kicker": "Antes de empezar",
+      "titulo": "Cómo usar este libro",
+      "resumen": "Este manual se lee como un cuaderno: un capítulo por vez, con índice, búsqueda y exportación.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "La ayuda está dentro del sistema, en El centro → Ayuda. No hace falta salir del cuaderno para consultar un paso." },
+        { "tipo": "parrafo", "texto": "El índice de la izquierda abre cada capítulo. Abajo de la lectura están Anterior y Siguiente, para recorrerlo en orden. El buscador filtra por palabras del título o del texto." },
+        { "tipo": "pasos", "titulo": "Exportar", "items": [
+          "Exportar este capítulo descarga solo la sección que está abierta.",
+          "Exportar el libro completo arma un PDF con portada y todos los capítulos.",
+          "El archivo usa la identidad del centro: tinta oscura, verde menta y amarillo cálido."
+        ]},
+        { "tipo": "nota", "texto": "Las notas en amarillo marcan un cuidado: un permiso, un campo obligatorio o un dato que el sistema calcula solo." }
+      ]
+    },
+    {
+      "id": "ingreso",
+      "kicker": "Puerta",
+      "titulo": "Ingreso, sesión y roles",
+      "resumen": "Hay dos formas de entrar. La sesión recuerda quién es hasta cerrarla.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "En la pantalla de ingreso se escribe el correo y la contraseña. El botón Entrar abre el cuaderno. Si los datos no coinciden, el sistema avisa y no deja pasar." },
+        { "tipo": "lista", "titulo": "Roles", "items": [
+          "Profesional (psicopedagoga): pacientes, evaluaciones, historial, estadísticas, turnera y su propia configuración.",
+          "Administrador: todo lo anterior, más el control de usuarios y la baja de pacientes."
+        ]},
+        { "tipo": "pasos", "titulo": "Durante la sesión", "items": [
+          "El nombre y el rol quedan en la pastilla de la esquina superior.",
+          "El menú solo muestra Control de usuarios si la sesión es de administrador.",
+          "Cerrar sesión está al pie del menú. Después hay que volver a identificarse."
+        ]},
+        { "tipo": "nota", "texto": "La sesión dura mientras el navegador la conserve. Si pasa mucho tiempo o se cierra el navegador, puede pedir el ingreso otra vez." }
+      ]
+    },
+    {
+      "id": "el-dia",
+      "kicker": "El día",
+      "titulo": "El tablero de la mañana",
+      "resumen": "La primera hoja saluda, muestra el próximo turno y los últimos legajos.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Al entrar se abre El día. Arriba está la fecha y un saludo con el nombre de quien ingresó. La frase de abajo resume cuántos encuentros hay por delante y cuál es el rango de edad que más consulta." },
+        { "tipo": "lista", "titulo": "Qué se ve", "items": [
+          "Próximo encuentro: paciente, motivo, profesional, fecha y hora. Si es hoy, la fecha dice Hoy.",
+          "Lo que sigue: la agenda inmediata, en una línea de tiempo. El punto verde es un turno confirmado; el amarillo, uno pendiente.",
+          "Últimos legajos: las evaluaciones más recientes, con edad cronológica y desarrollo del lenguaje. Cada ficha abre el legajo."
+        ]},
+        { "tipo": "pasos", "titulo": "Desde el tablero", "items": [
+          "Abrir turnera lleva a la agenda completa.",
+          "Escribir evaluación abre un legajo nuevo."
+        ]}
+      ]
+    },
+    {
+      "id": "pacientes",
+      "kicker": "Clínica",
+      "titulo": "Pacientes",
+      "resumen": "La ficha de la persona: identidad, contacto y fecha de nacimiento, que después calcula la edad.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Pacientes lista a todas las personas del centro, ordenadas por apellido. El buscador filtra por nombre, apellido o correo mientras se escribe." },
+        { "tipo": "pasos", "titulo": "Alta", "items": [
+          "Pulsar Nuevo paciente.",
+          "Completar nombre, apellido y fecha de nacimiento. Esos tres datos son obligatorios.",
+          "Teléfono, correo y dirección son opcionales.",
+          "Guardar. La persona queda disponible para evaluaciones y turnos."
+        ]},
+        { "tipo": "pasos", "titulo": "Modificación", "items": [
+          "En la fila, pulsar Editar.",
+          "Corregir los datos y guardar. Las evaluaciones ya hechas siguen ligadas a esa persona."
+        ]},
+        { "tipo": "nota", "texto": "Eliminar un paciente es una acción de administrador. Borra también sus evaluaciones, imágenes y turnos. El profesional puede editar la ficha, no darla de baja." },
+        { "tipo": "parrafo", "texto": "También se puede crear un paciente en el momento de registrar una evaluación, marcando Registrar un paciente nuevo. Sirve cuando la persona llega por primera vez y el legajo se abre en el mismo gesto." }
+      ]
+    },
+    {
+      "id": "evaluaciones",
+      "kicker": "Clínica",
+      "titulo": "El legajo de evaluación",
+      "resumen": "La evaluación es la hoja central del centro. Reúne motivo, desarrollo, vida cotidiana y producciones.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Nueva evaluación abre un legajo en capítulos: Quién consulta, Por qué llega, Desarrollo, La vida cotidiana y Lo que queda escrito. La edad cronológica, en años y meses, se calcula sola con la fecha de nacimiento y la fecha de la evaluación. Aparece en la placa amarilla." },
+        { "tipo": "lista", "titulo": "Qué se asienta", "items": [
+          "Paciente, ya existente o nuevo, y fecha de la evaluación.",
+          "Motivo inicial de la consulta.",
+          "Desarrollo del lenguaje: Bajo, Por encima del promedio, Óptimo o Avanzado para la edad.",
+          "Desarrollo motor, en texto libre.",
+          "Alimentación: A considerar o Aceptable.",
+          "Sueño: Escaso, Interrumpido o Aceptable.",
+          "Tiempo libre y juego, en texto.",
+          "Otras observaciones.",
+          "Imágenes de producciones: escrituras, dibujos o cálculos. JPG, PNG, WEBP o GIF, hasta 6 MB cada una."
+        ]},
+        { "tipo": "nota", "texto": "Además del paciente y la fecha, hay que completar al menos un campo clínico. El sistema no guarda una hoja vacía." },
+        { "tipo": "pasos", "titulo": "Después de guardar", "items": [
+          "La evaluación aparece en Evaluaciones y en el historial de esa persona.",
+          "Ver abre el legajo. Desde ahí se edita o se exporta el PDF de esa evaluación.",
+          "Quien la registró puede editarla o eliminarla. El administrador puede hacerlo con cualquiera.",
+          "En la edición se pueden sumar imágenes o quitar las que ya estaban."
+        ]}
+      ]
+    },
+    {
+      "id": "historial",
+      "kicker": "Clínica",
+      "titulo": "Historial y documentos",
+      "resumen": "El historial busca las evaluaciones de una persona o de un período, y las baja en PDF.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Historial no lista todo de entrada. Pide un criterio: el nombre del paciente, un desde, un hasta, o una combinación. Así se evita abrir el cuaderno entero cuando se busca un tramo." },
+        { "tipo": "pasos", "titulo": "Buscar", "items": [
+          "Escribir el apellido o el nombre, si se conoce.",
+          "Elegir Desde y Hasta si importa el período. Se pueden usar solos, sin nombre.",
+          "Pulsar Buscar. Cada fila muestra fecha, persona, edad de entonces, motivo y lenguaje.",
+          "Ver abre el legajo. PDF baja solo esa evaluación."
+        ]},
+        { "tipo": "parrafo", "texto": "Exportar PDF, arriba de la tabla, arma un solo documento con todas las evaluaciones de la búsqueda: útil para una devolución o para el archivo de la familia." },
+        { "tipo": "nota", "texto": "Si no hay resultados, el PDF no se genera. Primero tiene que haber una búsqueda con filas." }
+      ]
+    },
+    {
+      "id": "estadisticas",
+      "kicker": "El centro",
+      "titulo": "El retrato estadístico",
+      "resumen": "Una lectura del conjunto: cuántas consultas hay, de qué edades y cómo se distribuye el lenguaje.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Retrato del centro abre con una frase. Por ejemplo, cuántas consultas corresponden al rango de edad con mayor incidencia. Debajo, una cinta de colores muestra el porcentaje de cada valor de desarrollo del lenguaje." },
+        { "tipo": "lista", "titulo": "Los cuatro valores de lenguaje", "items": [
+          "Bajo.",
+          "Por encima del promedio.",
+          "Óptimo.",
+          "Avanzado para la edad."
+        ]},
+        { "tipo": "parrafo", "texto": "Más abajo hay notas breves: evaluaciones, pacientes, profesionales y el rango etario. Los cuadros de profesional, edades, alimentación y sueño permiten comparar sin salir de la misma hoja." },
+        { "tipo": "nota", "texto": "Los porcentajes se calculan sobre las evaluaciones que tienen lenguaje cargado. La edad de cada consulta es la edad cronológica en la fecha de esa evaluación, no la edad de hoy." }
+      ]
+    },
+    {
+      "id": "turnera",
+      "kicker": "El día",
+      "titulo": "La turnera",
+      "resumen": "Agenda de citas: alta, cambio, baja, profesional asignado y PDF de la agenda.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Turnera muestra los turnos ordenados por fecha y hora. Se puede acotar con Desde, Hasta y Estado. Los estados son pendiente, confirmado, cancelado y realizado." },
+        { "tipo": "pasos", "titulo": "Dar un turno de alta", "items": [
+          "Pulsar Nuevo turno.",
+          "Elegir paciente y profesional asignado.",
+          "Indicar fecha, hora, motivo y estado. Los cuatro primeros son obligatorios; el motivo ayuda a quien recibe.",
+          "Guardar turno."
+        ]},
+        { "tipo": "pasos", "titulo": "Cambiar o dar de baja", "items": [
+          "Modificar abre el mismo formulario con los datos actuales. Sirve para confirmar, pasar a realizado o corregir la hora.",
+          "Baja elimina el turno. No borra al paciente ni sus evaluaciones."
+        ]},
+        { "tipo": "nota", "texto": "Una misma persona no puede tener dos turnos en la misma fecha y hora. Si ocurre, el sistema lo avisa y no duplica la cita." },
+        { "tipo": "parrafo", "texto": "Exportar agenda PDF descarga la lista que se está viendo, con los filtros aplicados. En el tablero, los turnos pendientes y confirmados de hoy en adelante aparecen como avisos del día." }
+      ]
+    },
+    {
+      "id": "perfil",
+      "kicker": "El centro",
+      "titulo": "Mi lugar",
+      "resumen": "Cada persona actualiza su nombre y su contraseña, sin tocar la cuenta de otra.",
+      "bloques": [
+        { "tipo": "pasos", "titulo": "Datos personales", "items": [
+          "Abrir Mi configuración.",
+          "Corregir nombre o apellido y pulsar Guardar datos.",
+          "El correo y el rol se muestran, pero no se cambian desde aquí. El correo es la llave de ingreso; el rol lo define la administración."
+        ]},
+        { "tipo": "pasos", "titulo": "Contraseña", "items": [
+          "Escribir la contraseña actual.",
+          "Escribir la nueva, de al menos 6 caracteres.",
+          "Pulsar Actualizar contraseña. El cambio queda registrado en el acceso del centro."
+        ]},
+        { "tipo": "nota", "texto": "Si la contraseña actual no coincide, no se reemplaza. Nadie más puede cambiar la contraseña de otra persona desde esta hoja: cada quien lo hace en su sesión." }
+      ]
+    },
+    {
+      "id": "usuarios",
+      "kicker": "Administración",
+      "titulo": "Control de usuarios",
+      "rol": "administrador",
+      "resumen": "Solo el administrador crea cuentas, cambia roles y consulta los accesos.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Control de usuarios no aparece en el menú del profesional. Si alguien sin ese rol intenta abrir la dirección, el sistema lo devuelve al día." },
+        { "tipo": "pasos", "titulo": "Nueva cuenta", "items": [
+          "Pulsar Nuevo usuario.",
+          "Completar nombre, apellido, correo y contraseña (mínimo 6 caracteres).",
+          "Elegir el rol: Profesional o Administrador.",
+          "Guardar. El correo no puede repetirse."
+        ]},
+        { "tipo": "pasos", "titulo": "Editar o dar de baja", "items": [
+          "Editar cambia datos, rol o, si se escribe, una contraseña nueva. Si la contraseña se deja vacía, la anterior sigue valiendo.",
+          "Eliminar quita la cuenta. No se puede eliminar la cuenta con la que se está trabajando.",
+          "Abajo, Últimos accesos muestra ingresos, salidas y cambios de contraseña, con fecha y detalle."
+        ]},
+        { "tipo": "nota", "texto": "Dar de baja un profesional que ya registró evaluaciones o turnos puede afectar esos registros, porque están ligados a su usuario. Conviene pensarlo antes de borrar." }
+      ]
+    },
+    {
+      "id": "oficio",
+      "kicker": "Cierre",
+      "titulo": "Oficio del cuaderno",
+      "resumen": "Unos cuidados para que el archivo del centro siga siendo claro.",
+      "bloques": [
+        { "tipo": "lista", "titulo": "Al escribir", "items": [
+          "El motivo y las observaciones se leen después, en una devolución o en un PDF. Conviene escribirlos para otra persona, no solo para quien estuvo en la sesión.",
+          "La edad del legajo es la de ese día. Si la evaluación se corrige y cambia la fecha, la edad se recalcula.",
+          "Las imágenes son producciones del paciente. El nombre del archivo no importa: el sistema lo guarda junto al legajo."
+        ]},
+        { "tipo": "lista", "titulo": "Al citar", "items": [
+          "Confirmar el turno cuando la familia ya acordó el horario. Dejarlo pendiente si todavía se espera respuesta.",
+          "Pasarlo a realizado cuando la sesión ocurrió, o a cancelado si no. Así el tablero no sigue avisando una cita vieja."
+        ]},
+        { "tipo": "parrafo", "texto": "El cuaderno está para acompañar. Cada hoja —paciente, legajo, turno, retrato— existe para que el próximo profesional encuentre lo que el anterior dejó escrito." }
+      ]
+    },
+    {
+      "id": "desarrollo",
+      "kicker": "Desarrollo",
+      "titulo": "Quién hizo este sistema",
+      "resumen": "El cuaderno fue desarrollado por Burgos Agustín y Pintos Julio, de Webxpert.",
+      "bloques": [
+        { "tipo": "parrafo", "texto": "Este sistema de gestión del Centro de Atención Psicopedagógica fue desarrollado por Burgos Agustín y Pintos Julio." },
+        { "tipo": "lista", "titulo": "Webxpert", "items": [
+          "Burgos Agustín, desarrollo.",
+          "Pintos Julio, desarrollo.",
+          "Estudio: Webxpert — www.webxpert.com.ar."
+        ]},
+        { "tipo": "nota", "texto": "Webxpert acompaña el diseño y la construcción del cuaderno. El sitio del estudio es www.webxpert.com.ar." }
+      ]
+    }
+  ]
+}

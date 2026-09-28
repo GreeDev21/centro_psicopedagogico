@@ -1,0 +1,81 @@
+-- Crear base de datos si no existe
+CREATE DATABASE IF NOT EXISTS centro_psicopedagogico
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
+
+USE centro_psicopedagogico;
+
+-- Tabla de usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  correo VARCHAR(150) UNIQUE NOT NULL,
+  contrasena VARCHAR(255) NOT NULL,
+  rol ENUM('psicopedagoga','administrador') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de pacientes
+CREATE TABLE IF NOT EXISTS pacientes (
+  id_paciente INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  fecha_nacimiento DATE NOT NULL,
+  telefono VARCHAR(50),
+  correo VARCHAR(150),
+  direccion VARCHAR(200),
+  fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de evaluaciones
+CREATE TABLE IF NOT EXISTS evaluaciones (
+  id_evaluacion INT AUTO_INCREMENT PRIMARY KEY,
+  id_paciente INT NOT NULL,
+  id_usuario INT NOT NULL,
+  fecha_evaluacion DATE NOT NULL,
+  motivo_consulta TEXT,
+  desarrollo_lenguaje ENUM('Bajo','Por encima del promedio','Óptimo','Avanzado'),
+  desarrollo_motor TEXT,
+  alimentacion ENUM('A considerar','Aceptable'),
+  sueno ENUM('Escaso','Interrumpido','Aceptable'),
+  tiempo_libre TEXT,
+  juego TEXT,
+  observaciones TEXT,
+  FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente) ON DELETE CASCADE,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de archivos vinculados a evaluaciones
+CREATE TABLE IF NOT EXISTS archivos_evaluacion (
+  id_archivo INT AUTO_INCREMENT PRIMARY KEY,
+  id_evaluacion INT NOT NULL,
+  path_archivo VARCHAR(255) NOT NULL,
+  tipo VARCHAR(50),
+  fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_evaluacion) REFERENCES evaluaciones(id_evaluacion) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de turnos
+CREATE TABLE IF NOT EXISTS turnos (
+  id_turno INT AUTO_INCREMENT PRIMARY KEY,
+  id_paciente INT NOT NULL,
+  id_usuario INT NOT NULL,
+  fecha_turno DATE NOT NULL,
+  hora_turno TIME NOT NULL,
+  motivo TEXT,
+  estado ENUM('pendiente','confirmado','cancelado','realizado') DEFAULT 'pendiente',
+  FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente) ON DELETE CASCADE,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+  UNIQUE (id_paciente, fecha_turno, hora_turno)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de logs de acceso
+CREATE TABLE IF NOT EXISTS logs_acceso (
+  id_log INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT NOT NULL,
+  fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  accion VARCHAR(100) NOT NULL,
+  ip VARCHAR(45),
+  detalle TEXT,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

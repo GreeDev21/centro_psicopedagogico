@@ -1,0 +1,55 @@
+USE centro_psicopedagogico;
+
+-- Usuarios
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol) VALUES
+('Carlos', 'Ramírez', 'c.ramirez@centro.com', 'hash123', 'psicopedagoga'),
+('María', 'Gómez', 'm.gomez@centro.com', 'hash123', 'psicopedagoga'),
+('Lucía', 'Fernández', 'l.fernandez@centro.com', 'hash123', 'psicopedagoga'),
+('Ana', 'Martínez', 'a.martinez@centro.com', 'hash123', 'psicopedagoga'),
+('Admin', 'General', 'admin@centro.com', 'Admin1234', 'administrador');
+
+-- Pacientes (20 ficticios)
+INSERT INTO pacientes (nombre, apellido, fecha_nacimiento, telefono, correo, direccion) VALUES
+('Juan', 'Pérez', '2015-03-12', '3764000001', 'juan.perez@mail.com', 'Calle 1'),
+('Sofía', 'López', '2014-07-25', '3764000002', 'sofia.lopez@mail.com', 'Calle 2'),
+('Martín', 'García', '2016-01-10', '3764000003', 'martin.garcia@mail.com', 'Calle 3'),
+('Valentina', 'Rodríguez', '2013-11-05', '3764000004', 'valentina.rodriguez@mail.com', 'Calle 4'),
+('Tomás', 'Fernández', '2015-09-18', '3764000005', 'tomas.fernandez@mail.com', 'Calle 5'),
+('Camila', 'Gómez', '2012-02-22', '3764000006', 'camila.gomez@mail.com', 'Calle 6'),
+('Mateo', 'Martínez', '2014-12-30', '3764000007', 'mateo.martinez@mail.com', 'Calle 7'),
+('Isabella', 'Ramírez', '2016-06-14', '3764000008', 'isabella.ramirez@mail.com', 'Calle 8'),
+('Benjamín', 'Torres', '2013-04-09', '3764000009', 'benjamin.torres@mail.com', 'Calle 9'),
+('Mía', 'Flores', '2015-08-21', '3764000010', 'mia.flores@mail.com', 'Calle 10'),
+('Lucas', 'Díaz', '2012-10-01', '3764000011', 'lucas.diaz@mail.com', 'Calle 11'),
+('Emma', 'Morales', '2014-05-17', '3764000012', 'emma.morales@mail.com', 'Calle 12'),
+('Thiago', 'Suárez', '2013-09-23', '3764000013', 'thiago.suarez@mail.com', 'Calle 13'),
+('Catalina', 'Rivas', '2016-12-11', '3764000014', 'catalina.rivas@mail.com', 'Calle 14'),
+('Santiago', 'Navarro', '2015-07-07', '3764000015', 'santiago.navarro@mail.com', 'Calle 15'),
+('Renata', 'Silva', '2012-01-19', '3764000016', 'renata.silva@mail.com', 'Calle 16'),
+('Julián', 'Castro', '2013-03-28', '3764000017', 'julian.castro@mail.com', 'Calle 17'),
+('Abril', 'Mendoza', '2014-11-02', '3764000018', 'abril.mendoza@mail.com', 'Calle 18'),
+('Franco', 'Ortiz', '2016-08-15', '3764000019', 'franco.ortiz@mail.com', 'Calle 19'),
+('Paula', 'Domínguez', '2015-04-27', '3764000020', 'paula.dominguez@mail.com', 'Calle 20');
+
+-- Evaluaciones (ejemplo: 5 por paciente, distribuidas entre psicopedagogos)
+-- Aquí se generan múltiples INSERTS, variando datos ficticios
+INSERT INTO evaluaciones (id_paciente, id_usuario, fecha_evaluacion, motivo_consulta, desarrollo_lenguaje, desarrollo_motor, alimentacion, sueno, tiempo_libre, juego, observaciones)
+VALUES
+(1, 1, '2026-01-15', 'Dificultades en lenguaje', 'Bajo', 'Motricidad fina adecuada', 'Aceptable', 'Interrumpido', 'Juega fútbol', 'Se adapta bien', 'Se recomienda seguimiento'),
+(1, 2, '2026-02-20', 'Seguimiento', 'Óptimo', 'Buen equilibrio', 'Aceptable', 'Aceptable', 'Dibuja en casa', 'Resultados positivos', 'Mejoría notable'),
+-- ... repetir con variaciones para cada paciente (mínimo 5 evaluaciones)
+
+-- Turnos (ejemplo)
+INSERT INTO turnos (id_paciente, id_usuario, fecha_turno, hora_turno, motivo, estado)
+VALUES
+(1, 1, '2026-09-25', '17:30:00', 'Evaluación inicial', 'pendiente'),
+(2, 2, '2026-09-26', '18:00:00', 'Seguimiento', 'confirmado'),
+(3, 3, '2026-09-27', '19:00:00', 'Consulta motriz', 'realizado'),
+-- ... más registros para todos los pacientes
+
+-- Logs de acceso (ejemplo)
+INSERT INTO logs_acceso (id_usuario, accion, ip, detalle)
+VALUES
+(5, 'login', '192.168.0.10', 'Administrador ingresó al sistema'),
+(1, 'cambio contraseña', '192.168.0.11', 'Usuario Carlos Ramírez cambió su contraseña'),
+(2, 'logout', '192.168.0.12', 'Usuario María Gómez cerró sesión');
