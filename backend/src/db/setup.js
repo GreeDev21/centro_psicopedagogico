@@ -177,8 +177,8 @@ async function run() {
     [7, 3, '2026-10-01', '16:30:00', 'Evaluación motriz', 'confirmado'],
     [8, 4, '2026-10-01', '19:00:00', 'Orientación escolar', 'pendiente'],
     [9, 1, '2026-10-02', '17:00:00', 'Seguimiento', 'confirmado'],
-    [10, 2, '2026-10-03', '16:00:00', 'Consulta inicial', 'pendiente'],
-    [11, 3, '2026-09-20', '17:30:00', 'Evaluación inicial', 'realizado'],
+    [10, 2, '2026-10-05', '16:00:00', 'Consulta inicial', 'pendiente'],
+    [11, 3, '2026-09-21', '17:30:00', 'Evaluación inicial', 'realizado'],
     [12, 4, '2026-09-22', '18:00:00', 'Seguimiento', 'realizado'],
     [13, 1, '2026-09-23', '16:00:00', 'Devolución', 'cancelado'],
     [14, 2, '2026-09-24', '17:00:00', 'Consulta motriz', 'realizado'],
@@ -186,12 +186,12 @@ async function run() {
     [16, 4, '2026-10-07', '15:00:00', 'Evaluación integral', 'confirmado'],
     [17, 1, '2026-10-08', '16:30:00', 'Apoyo escolar', 'pendiente'],
     [18, 2, '2026-10-09', '17:30:00', 'Consulta familiar', 'confirmado'],
-    [19, 3, '2026-10-10', '18:30:00', 'Seguimiento', 'pendiente'],
+    [19, 3, '2026-10-12', '18:30:00', 'Seguimiento', 'pendiente'],
     [20, 4, '2026-10-13', '16:00:00', 'Evaluación de cierre', 'confirmado'],
     [1, 2, '2026-10-14', '17:00:00', 'Control de avances', 'pendiente'],
     [3, 1, '2026-10-15', '18:00:00', 'Juego y lenguaje', 'confirmado'],
     [5, 3, '2026-09-18', '16:30:00', 'Evaluación inicial', 'realizado'],
-    [8, 1, '2026-09-19', '19:00:00', 'Orientación', 'cancelado']
+    [8, 1, '2026-09-21', '19:00:00', 'Orientación', 'cancelado']
   ];
 
   for (const row of turnos) {

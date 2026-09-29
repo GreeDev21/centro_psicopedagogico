@@ -147,14 +147,15 @@
         { "tipo": "pasos", "titulo": "Dar un turno de alta", "items": [
           "Pulsar Nuevo turno.",
           "Elegir paciente y profesional asignado.",
-          "Indicar fecha, hora, motivo y estado. Los cuatro primeros son obligatorios; el motivo ayuda a quien recibe.",
+          "Elegir un día de lunes a viernes, desde hoy en adelante, y un horario fijo cada 30 minutos: mañana de 8:00 a 11:30 o tarde de 15:00 a 20:00. El motivo ayuda a quien recibe.",
           "Guardar turno."
         ]},
         { "tipo": "pasos", "titulo": "Cambiar o dar de baja", "items": [
-          "Modificar abre el mismo formulario con los datos actuales. Sirve para confirmar, pasar a realizado o corregir la hora.",
+          "En la lista, el estado de un turno de hoy o de un día siguiente se cambia con el desplegable de esa fila, sin abrir el formulario.",
+          "Modificar abre el formulario para corregir paciente, profesional, fecha u hora. El estado de un turno anterior a hoy queda fijo.",
           "Baja elimina el turno. No borra al paciente ni sus evaluaciones."
         ]},
-        { "tipo": "nota", "texto": "Una misma persona no puede tener dos turnos en la misma fecha y hora. Si ocurre, el sistema lo avisa y no duplica la cita." },
+        { "tipo": "nota", "texto": "No se asignan turnos en una fecha anterior a hoy, ni sábados ni domingos, ni fuera de esas franjas. El estado de un turno ya pasado no se puede cambiar. Una misma persona no puede tener dos turnos en la misma fecha y hora." },
         { "tipo": "parrafo", "texto": "Exportar agenda PDF descarga la lista que se está viendo, con los filtros aplicados. En el tablero, los turnos pendientes y confirmados de hoy en adelante aparecen como avisos del día." }
       ]
     },

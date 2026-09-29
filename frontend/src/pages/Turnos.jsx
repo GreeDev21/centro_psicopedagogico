@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api, downloadPdf, ESTADO_TURNO, horaCorta } from '../api/client';
 import { fechaConAnio } from '../utils/fecha';
+import { esDiaHabil, hoyLocal, HORARIOS, HORARIOS_MANANA, HORARIOS_TARDE, proximoDiaHabil } from '../utils/agenda';
 import { Alert, Badge, Empty, Field, Modal } from '../components/ui';
 import { BuscadorPaciente } from '../components/BuscadorPaciente';
 
@@ -49,7 +50,7 @@ export function Turnos() {
     setForm({
       ...emptyForm,
       id_usuario: usuarios[0]?.id_usuario || '',
-      fecha_turno: new Date().toISOString().slice(0, 10)
+      fecha_turno: proximoDiaHabil()
     });
     setOpen(true);
   }
@@ -67,9 +68,32 @@ export function Turnos() {
     setOpen(true);
   }
 
+  function fechaValida(fecha) {
+    const original = editing ? String(editing.fecha_turno).slice(0, 10) : '';
+    if (fecha < hoyLocal() && fecha !== original) {
+      return 'No se pueden fijar turnos en una fecha anterior a hoy.';
+    }
+    if (!esDiaHabil(fecha)) return 'Los turnos son solo de lunes a viernes.';
+    return '';
+  }
+
+  function cambiarFecha(fecha) {
+    setForm({ ...form, fecha_turno: fecha });
+    setError(fecha ? fechaValida(fecha) : '');
+  }
+
   async function save(e) {
     e.preventDefault();
+    const mensajeFecha = fechaValida(form.fecha_turno);
+    if (mensajeFecha) {
+      setError(mensajeFecha);
+      return;
+    }
     setError('');
+    if (!HORARIOS.includes(form.hora_turno)) {
+      setError('Elegí un horario de la mañana (8:00 a 11:30) o de la tarde (15:00 a 20:00).');
+      return;
+    }
     try {
       if (editing) {
         await api(`/api/turnos/${editing.id_turno}`, { method: 'PUT', body: form });
@@ -78,6 +102,31 @@ export function Turnos() {
       }
       setOpen(false);
       await load();
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  async function cambiarEstado(item, estado) {
+    if (estado === item.estado) return;
+    setError('');
+    try {
+      await api(`/api/turnos/${item.id_turno}`, {
+        method: 'PUT',
+        body: {
+          id_paciente: item.id_paciente,
+          id_usuario: item.id_usuario,
+          fecha_turno: String(item.fecha_turno).slice(0, 10),
+          hora_turno: horaCorta(item.hora_turno),
+          motivo: item.motivo || '',
+          estado
+        }
+      });
+      setItems((prev) => prev.flatMap((row) => {
+        if (row.id_turno !== item.id_turno) return [row];
+        if (filtros.estado && filtros.estado !== estado) return [];
+        return [{ ...row, estado }];
+      }));
     } catch (err) {
       setError(err.message);
     }
@@ -136,7 +185,20 @@ export function Turnos() {
                     <td className="who">{item.paciente_apellido}, {item.paciente_nombre}</td>
                     <td>{item.profesional_nombre} {item.profesional_apellido}</td>
                     <td>{item.motivo || '—'}</td>
-                    <td><Badge value={item.estado} /></td>
+                    <td>
+                      {String(item.fecha_turno).slice(0, 10) < hoyLocal() ? (
+                        <Badge value={item.estado} />
+                      ) : (
+                        <select
+                          className="estado-select"
+                          aria-label={`Estado de ${item.paciente_apellido}, ${item.paciente_nombre}`}
+                          value={item.estado}
+                          onChange={(e) => cambiarEstado(item, e.target.value)}
+                        >
+                          {ESTADO_TURNO.map((estado) => <option key={estado} value={estado}>{estado}</option>)}
+                        </select>
+                      )}
+                    </td>
                     <td className="actions">
                       <button className="btn btn-ghost" type="button" onClick={() => openEdit(item)}>Modificar</button>
                       <button className="btn btn-danger" type="button" onClick={() => remove(item)}>Baja</button>
@@ -166,13 +228,36 @@ export function Turnos() {
               </select>
             </Field>
             <div className="grid grid-2">
-              <Field label="Fecha"><input type="date" value={form.fecha_turno} onChange={(e) => setForm({ ...form, fecha_turno: e.target.value })} required /></Field>
-              <Field label="Hora"><input type="time" value={form.hora_turno} onChange={(e) => setForm({ ...form, hora_turno: e.target.value })} required /></Field>
+              <Field label="Fecha" hint="Desde hoy, de lunes a viernes.">
+                <input
+                  type="date"
+                  min={editing && String(editing.fecha_turno).slice(0, 10) < hoyLocal() ? undefined : hoyLocal()}
+                  value={form.fecha_turno}
+                  onChange={(e) => cambiarFecha(e.target.value)}
+                  required
+                />
+              </Field>
+              <Field label="Hora" hint="Cada 30 minutos.">
+                <select value={form.hora_turno} onChange={(e) => setForm({ ...form, hora_turno: e.target.value })} required>
+                  <option value="">Seleccione</option>
+                  <optgroup label="Mañana">
+                    {HORARIOS_MANANA.map((hora) => <option key={hora} value={hora}>{hora}</option>)}
+                  </optgroup>
+                  <optgroup label="Tarde">
+                    {HORARIOS_TARDE.map((hora) => <option key={hora} value={hora}>{hora}</option>)}
+                  </optgroup>
+                </select>
+              </Field>
             </div>
+            {error && <Alert type="error">{error}</Alert>}
             <Field label="Motivo"><textarea value={form.motivo} onChange={(e) => setForm({ ...form, motivo: e.target.value })} /></Field>
-            <Field label="Estado">
-              <select value={form.estado} onChange={(e) => setForm({ ...form, estado: e.target.value })}>
-                {ESTADO_TURNO.map((e) => <option key={e}>{e}</option>)}
+            <Field label="Estado" hint={String(form.fecha_turno).slice(0, 10) < hoyLocal() ? 'El estado de un turno anterior a hoy no se modifica.' : ''}>
+              <select
+                value={form.estado}
+                disabled={String(form.fecha_turno).slice(0, 10) < hoyLocal()}
+                onChange={(e) => setForm({ ...form, estado: e.target.value })}
+              >
+                {ESTADO_TURNO.map((estado) => <option key={estado}>{estado}</option>)}
               </select>
             </Field>
             <button className="btn btn-primary" type="submit">Guardar turno</button>

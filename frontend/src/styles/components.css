@@ -204,6 +204,17 @@ table.data tr:focus-within .actions { opacity: 1; }
 .badge-confirmado { background: #e5f8ee; color: var(--verde-tinta); }
 .badge-cancelado { background: #fde8e8; color: #9b3030; }
 .badge-realizado { background: #e7f0fb; color: #2b5c9a; }
+
+.estado-select {
+  border: 1px solid var(--borde);
+  background: var(--hoja);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 0.88rem;
+  text-transform: capitalize;
+}
 .badge-admin { background: #e7f0fb; color: #2b5c9a; }
 .badge-psico { background: #e5f8ee; color: var(--verde-tinta); }
 
