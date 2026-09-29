@@ -3,6 +3,29 @@ const userRepository = require('../repositories/userRepository');
 const logService = require('../services/logService');
 const { publicUser } = require('../utils/http');
 const { asyncHandler } = require('../utils/asyncHandler');
+const { sinAccesoBd } = require('../utils/dbError');
+const { adminDeRespaldo, claveCoincide } = require('../utils/adminEnv');
+
+async function buscarUsuario(correo) {
+  try {
+    return { user: await userRepository.findByCorreo(correo) };
+  } catch (err) {
+    if (!sinAccesoBd(err)) throw err;
+    return { sinBase: true };
+  }
+}
+
+function ingresarAdminDeRespaldo(req, res, correo, contrasena) {
+  const admin = adminDeRespaldo();
+  if (!admin) {
+    return res.status(503).json({ message: 'No hay acceso a la base de datos.' });
+  }
+  if (admin.correo !== correo || !claveCoincide(contrasena, admin.contrasena)) {
+    return res.status(401).json({ message: 'Credenciales inválidas. La base de datos no está accesible.' });
+  }
+  req.session.user = publicUser(admin);
+  return res.json({ user: req.session.user });
+}
 
 const login = asyncHandler(async (req, res) => {
   const correo = String(req.body.correo || '').trim().toLowerCase();
@@ -12,7 +35,12 @@ const login = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'Ingrese correo y contraseña.' });
   }
 
-  const user = await userRepository.findByCorreo(correo);
+  const resultado = await buscarUsuario(correo);
+  if (resultado.sinBase) {
+    return ingresarAdminDeRespaldo(req, res, correo, contrasena);
+  }
+
+  const user = resultado.user;
   if (!user) {
     return res.status(401).json({ message: 'Credenciales inválidas.' });
   }
@@ -29,8 +57,12 @@ const login = asyncHandler(async (req, res) => {
 
 const logout = asyncHandler(async (req, res) => {
   const user = req.session.user;
-  if (user) {
-    await logService.registrar(user.id_usuario, 'logout', req, `${user.nombre} ${user.apellido} cerró sesión`);
+  if (user?.id_usuario) {
+    try {
+      await logService.registrar(user.id_usuario, 'logout', req, `${user.nombre} ${user.apellido} cerró sesión`);
+    } catch (err) {
+      if (!sinAccesoBd(err)) throw err;
+    }
   }
   req.session.destroy(() => {
     res.clearCookie('centro.sid');
@@ -43,6 +75,9 @@ const me = asyncHandler(async (req, res) => {
 });
 
 const changePassword = asyncHandler(async (req, res) => {
+  if (!req.session.user.id_usuario) {
+    return res.status(503).json({ message: 'Este administrador de respaldo no puede cambiar la contraseña sin la base de datos.' });
+  }
   const { actual, nueva } = req.body;
   if (!actual || !nueva || String(nueva).length < 6) {
     return res.status(400).json({ message: 'La nueva contraseña debe tener al menos 6 caracteres.' });
